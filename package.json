@@ -1,0 +1,13 @@
+{
+  "name": "libgraph",
+  "version": "0.1.0",
+  "scripts": {
+    "compil": "npx browserify -p tinyify src/main.js -o dist/lib.graph.js",
+    "watch": "watchify src/main.js -o dist/lib.graph.js"
+  },
+  "dependencies": {
+    "browserify": "^17.0.0",
+    "tinyify": "^4.0.0",
+    "watchify": "^4.0.0"
+  }
+}
