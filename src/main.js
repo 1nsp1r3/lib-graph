@@ -1,4 +1,4 @@
-const Chart = require("../lib/chartjs-4.3.0.min.js")
+const Chart = require("chartjs")
 
 let chart = null
 

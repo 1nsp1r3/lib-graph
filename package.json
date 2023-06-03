@@ -5,9 +5,12 @@
     "compil": "npx browserify -p tinyify src/main.js -o dist/lib.graph.js",
     "watch": "watchify src/main.js -o dist/lib.graph.js"
   },
-  "dependencies": {
+  "devDependencies": {
     "browserify": "^17.0.0",
     "tinyify": "^4.0.0",
     "watchify": "^4.0.0"
+  },
+  "dependencies": {
+    "chartjs": "^0.3.24"
   }
 }
