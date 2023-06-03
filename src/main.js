@@ -50,7 +50,5 @@ class Graph {
   }
 }
 
-/**
- * CommonJS format for NodeJS and Espruino
- */
+//CommonJS style
 module.exports = Graph
