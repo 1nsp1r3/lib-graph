@@ -23,6 +23,13 @@ class Graph {
 
     this.options = {
       type: 'line',
+      options: {
+        elements: {
+          point: {
+            radius: 0
+          }
+        }
+      },
       data: {
         labels: labels,
         datasets: [{
