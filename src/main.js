@@ -1,61 +1,63 @@
-const Chart = require("../lib/chart-4.3.0.min.js")
+import Chart from "chart.js/auto"
+import "chartjs-adapter-date-fns"
 
 let chart = null
 
 class Graph {
   /**
-   * Data = [
-   *   { label: 2010, value: 10 },
-   *   { label: 2011, value: 20 },
-   *   { label: 2012, value: 15 },
-   *  ]
+   * new Graph(
+   *   document.getElementById("graph"),
+   *   "Test A",
+   *   [
+   *     { x: now-(86400000*4), y: 10 },
+   *     { x: now-(86400000)  , y: 20 },
+   *     { x: now             , y: 15 },
+   *   ],
+   * )
    */
-  constructor(CanvasId, Legend, Data){
-    this.canvas = document.getElementById(CanvasId)
-
-    let labels = []
-    let values = []
-
-    if (Data){
-      labels = Data.map(it => it.label)
-      values = Data.map(it => it.value)
-    }
-
+  constructor(HtmlCanvasElement, Legend, Data){
+    const data = Data == undefined ? [] : Data
+    this.canvas = HtmlCanvasElement
     this.options = {
-      type: 'line',
+      type: "line",
       options: {
         elements: {
           point: {
             radius: 0
           }
+        },
+        scales: {
+          x: {
+            type: "time",
+            time: {
+              unit: "minute",
+              displayFormats: {
+                minute: "HH:mm:ss", //dd/LL/yyyy HH:mm:ss
+              }
+            }
+          }
         }
       },
       data: {
-        labels: labels,
         datasets: [{
           label: Legend,
-          data: values,
+          data,
         }],
       },
     }
-  }
-
-  display(){
     this.chart = new Chart(this.canvas, this.options)
   }
 
   /**
    * {
-   *   label: 2010,
-   *   value: 8,
+   *   x: Date.now(),
+   *   y: 10,
    * }
    */
   addData(Data){
-    this.chart.data.labels.push(Data.label);
-    this.chart.data.datasets.forEach((dataset) => dataset.data.push(Data.value))
+    this.chart.data.datasets.forEach((Dataset) => Dataset.data.push(Data))
     this.chart.update()
   }
 }
 
-//CommonJS style
-module.exports = Graph
+export default Graph
